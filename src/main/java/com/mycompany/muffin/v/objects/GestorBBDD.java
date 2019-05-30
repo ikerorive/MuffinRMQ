@@ -103,6 +103,7 @@ public class GestorBBDD {
                 Class.forName("com.mysql.jdbc.Driver");
                 connection = DriverManager.getConnection(  
                 "jdbc:mysql://localhost:3306/muffin?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","1234");
+                System.out.println("Connection opened");
         } catch (SQLException e) {
                 e.printStackTrace();
         } catch (ClassNotFoundException e) {

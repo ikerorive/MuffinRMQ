@@ -5,30 +5,65 @@
  */
 package com.mycompany.muffin.v.objects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Aitor Piñeiro
  */
 public class Chat {
     int id;
+    int eventoID;
     String descripcion;
-    User moderador;
+    String nombre;
+    int moderador;
+
+    List<Message> mensajes;
     
-    public Chat(int id, String descripcion, User moderador){
+    public Chat(int id,int eventoID, String descripcion, int moderador){
         this.id = id;
+        this.eventoID = eventoID;
         this.descripcion = descripcion;
         this.moderador = moderador;
+        mensajes = new ArrayList<>();
     }
 
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    public void setMensajes(List<Message> mensajes) {
+        this.mensajes = mensajes;
+    }
+
+    public List<Message> getMensajes() {
+        return mensajes;
+    }
+
+    public void addMenssage(Message msg){
+        mensajes.add(msg);
+    }
+    
     public String getDescripcion() {
         return descripcion;
+    }
+    
+    public void setEventoID(int eventoID){
+        this.eventoID = eventoID;
+    }
+    public int getEventoID(){
+        return eventoID;
     }
 
     public int getId() {
         return id;
     }
 
-    public User getModerador() {
+    public int getModerador() {
         return moderador;
     }
 
@@ -40,7 +75,7 @@ public class Chat {
         this.id = id;
     }
 
-    public void setModerador(User moderador) {
+    public void setModerador(int moderador) {
         this.moderador = moderador;
     }
     

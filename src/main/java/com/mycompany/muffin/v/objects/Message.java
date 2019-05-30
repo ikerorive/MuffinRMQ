@@ -13,17 +13,34 @@ import java.sql.Date;
  */
 public class Message {
     int id;
+    int chatId, userId;
     Date dateMensaje;
     String mensaje;
     User user;
     Chat chat;
     
-    public Message(int id, Chat chat, User user, Date dateMensaje, String mensaje){
+    public Message(int id, int chatId, int userId, Date dateMensaje, String mensaje){
         this.id = id;
-        this.chat = chat;
-        this.user = user;
+        this.chatId = chatId;
+        this.userId = userId;
         this.dateMensaje = dateMensaje;
         this.mensaje = mensaje;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setChatId(int chatId) {
+        this.chatId = chatId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public int getChatId() {
+        return chatId;
     }
 
     public Chat getChat() {
