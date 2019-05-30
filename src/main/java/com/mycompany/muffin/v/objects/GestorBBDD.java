@@ -33,7 +33,7 @@ public class GestorBBDD {
     public ResultSet leer(int value, String query) throws InterruptedException, SQLException{
         candado.acquire();
         PreparedStatement  ps = prepareStatement(value,query);
-        ResultSet rs = preparedStatement.executeQuery(query);
+        ResultSet rs = ps.executeQuery(query);
         candado.release();
         return rs;
     }
@@ -41,7 +41,7 @@ public class GestorBBDD {
     public ResultSet leer(String value, String query) throws InterruptedException, SQLException{
         candado.acquire();
         PreparedStatement  ps = prepareStatement(value,query);
-        ResultSet rs = preparedStatement.executeQuery(query);
+        ResultSet rs = ps.executeQuery(query);
         candado.release();
         return rs;
    
@@ -49,8 +49,15 @@ public class GestorBBDD {
     
     public ResultSet leer(String query) throws InterruptedException, SQLException{
         candado.acquire();
+        System.out.println(query);
         PreparedStatement  ps = prepareStatement(query);
-        ResultSet rs = preparedStatement.executeQuery(query);
+               
+        ResultSet rs = ps.executeQuery();
+         System.out.println(rs);
+ 
+        if(rs==null) System.out.println("No hay respuesta");
+        else System.out.println("Resupuesta: "+rs.getInt(1));
+        System.out.println("ssssssssssssssssssssssssssssssss");
         candado.release();
         return rs;
     }
@@ -59,7 +66,7 @@ public class GestorBBDD {
         candado.acquire();
         
         PreparedStatement  ps = prepareStatement(query);
-        preparedStatement.executeQuery(query);
+        ps.executeQuery(query);
         
         candado.release();
     }
@@ -68,7 +75,7 @@ public class GestorBBDD {
         candado.acquire();
         
         PreparedStatement  ps = prepareStatement(value,query);
-        preparedStatement.executeQuery(query);
+        ps.executeQuery(query);
         
         candado.release();
     }
@@ -77,21 +84,21 @@ public class GestorBBDD {
         candado.acquire();
         
         PreparedStatement  ps = prepareStatement(value, query);
-        preparedStatement.executeQuery(query);
+        ps.executeQuery(query);
         
         candado.release();
     }
     
     public PreparedStatement prepareStatement(int value, String query) throws SQLException{
-        PreparedStatement  preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, value);
-        return preparedStatement;    
+        PreparedStatement  ps = connection.prepareStatement(query);
+        ps.setInt(1, value);
+        return ps;    
     }
     
     public PreparedStatement prepareStatement(String value, String query) throws SQLException{
-        PreparedStatement  preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, value);
-        return preparedStatement;  
+        PreparedStatement  ps = connection.prepareStatement(query);
+        ps.setString(1, value);
+        return ps;  
     }
     
      public PreparedStatement prepareStatement(String query) throws SQLException{

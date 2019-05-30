@@ -41,11 +41,10 @@ public class App {
     public void loadDataFromDB(){
         listaFutures = new ArrayList<>();
         ResultSet rs = null;
-        Future<ResultSet> future = poolRead.submit(new Lector(database,"select * from chat"));
-        listaFutures.add(future);
-        
+        Future<ResultSet> future = poolRead.submit(new Lector(database,"select * from chat;"));
+       
         try{
-              rs = listaFutures.get(0).get();
+              rs = future.get();
         } catch(InterruptedException e){
             
         }catch(ExecutionException e){
@@ -55,6 +54,7 @@ public class App {
         //No tienen aun la lista de mensajes ni los usuarios suscritos a ese chat
         if(rs!=null) {
             try {
+                   System.out.println("Leyendo chats");
                 while(rs.next())  {
                         Chat c = new Chat(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4));
                         System.out.println("Id: "+c.getId());
@@ -79,9 +79,7 @@ public class App {
                 
             } catch(ExecutionException e){
                 
-            }
-            
-            
+            } 
         }
         
         
@@ -215,7 +213,7 @@ public class App {
     public static void main(String[] args) {
         App main = new App();
         main.loadDataFromDB();
-        main.initializeMiddleware();
+      //  main.initializeMiddleware();
     }
 
 }

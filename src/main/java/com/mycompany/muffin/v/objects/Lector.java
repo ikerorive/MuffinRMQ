@@ -49,6 +49,7 @@ public class Lector implements Callable<ResultSet>{
 
     public ResultSet makeQuery(){
         ResultSet rs = null;
+        System.out.println("Tipo de query: "+queryType);
          try{
             switch(queryType){
             case 0: rs = connection.leer(query);break;
