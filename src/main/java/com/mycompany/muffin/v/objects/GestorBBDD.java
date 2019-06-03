@@ -32,32 +32,27 @@ public class GestorBBDD {
     
     public ResultSet leer(int value, String query) throws InterruptedException, SQLException{
         candado.acquire();
-        PreparedStatement  ps = prepareStatement(value,query);
-        ResultSet rs = ps.executeQuery(query);
+        PreparedStatement  ps = prepareStatement2(value,query);        
+        ResultSet rs = ps.executeQuery();
         candado.release();
         return rs;
     }
     
     public ResultSet leer(String value, String query) throws InterruptedException, SQLException{
         candado.acquire();
-        PreparedStatement  ps = prepareStatement(value,query);
-        ResultSet rs = ps.executeQuery(query);
+        PreparedStatement  ps = prepareStatement2(value,query);
+        ResultSet rs = ps.executeQuery();   
         candado.release();
         return rs;
-   
      }
     
     public ResultSet leer(String query) throws InterruptedException, SQLException{
         candado.acquire();
-        System.out.println(query);
-        PreparedStatement  ps = prepareStatement(query);
-               
+        
+        System.out.println("Haciendo query"+query);
+        PreparedStatement  ps = prepareStatement2(query);
+        
         ResultSet rs = ps.executeQuery();
-         System.out.println(rs);
- 
-        if(rs==null) System.out.println("No hay respuesta");
-        else System.out.println("Resupuesta: "+rs.getInt(1));
-        System.out.println("ssssssssssssssssssssssssssssssss");
         candado.release();
         return rs;
     }
@@ -65,7 +60,7 @@ public class GestorBBDD {
     public void escribir(String query) throws InterruptedException, SQLException{
         candado.acquire();
         
-        PreparedStatement  ps = prepareStatement(query);
+        PreparedStatement  ps = prepareStatement2(query);
         ps.executeQuery(query);
         
         candado.release();
@@ -74,7 +69,7 @@ public class GestorBBDD {
     public void escribir(int value, String query) throws InterruptedException, SQLException{
         candado.acquire();
         
-        PreparedStatement  ps = prepareStatement(value,query);
+        PreparedStatement  ps = prepareStatement2(value,query);
         ps.executeQuery(query);
         
         candado.release();
@@ -83,25 +78,25 @@ public class GestorBBDD {
     public void escribir(String value, String query) throws InterruptedException, SQLException{
         candado.acquire();
         
-        PreparedStatement  ps = prepareStatement(value, query);
+        PreparedStatement  ps = prepareStatement2(value, query);
         ps.executeQuery(query);
         
         candado.release();
     }
-    
-    public PreparedStatement prepareStatement(int value, String query) throws SQLException{
+   
+    public PreparedStatement prepareStatement2(int value, String query) throws SQLException{
         PreparedStatement  ps = connection.prepareStatement(query);
         ps.setInt(1, value);
         return ps;    
     }
     
-    public PreparedStatement prepareStatement(String value, String query) throws SQLException{
+    public PreparedStatement prepareStatement2(String value, String query) throws SQLException{
         PreparedStatement  ps = connection.prepareStatement(query);
         ps.setString(1, value);
         return ps;  
     }
     
-     public PreparedStatement prepareStatement(String query) throws SQLException{
+     public PreparedStatement prepareStatement2(String query) throws SQLException{
         return connection.prepareStatement(query);
     }
     
